@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReTwitterify Advanced</title>
+  <link rel="stylesheet" href="popup.css">
+  <script src="rules.js" defer></script>
+  <script src="popup.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <img class="bird" src="icons/bird.svg" alt="" width="52" height="44">
+      <span class="app-name">ReTwitterify <span>Advanced</span></span>
+    </header>
+    <h1>Make it Twitter.</h1>
+    <p class="intro">The name. The bird. The Tweets.</p>
+    <form id="settings" aria-label="Twitter appearance settings">
+      <label class="setting master">
+        <span><strong>Bring back Twitter</strong><span id="enabled-description">Applies to your open Twitter tabs</span></span>
+        <input type="checkbox" role="switch" name="enabled" aria-describedby="enabled-description" disabled>
+        <span class="switch" aria-hidden="true"></span>
+      </label>
+      <fieldset id="features" disabled>
+        <legend class="sr-only">Choose what to restore</legend>
+        <label class="setting">
+          <span><strong>Twitter everywhere</strong><span>Headers, tab titles & interface labels</span></span>
+          <input type="checkbox" role="switch" name="brandText">
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+        <label class="setting">
+          <span><strong>The blue bird</strong><span>Site logos & browser tab icons</span></span>
+          <input type="checkbox" role="switch" name="logos">
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+        <label class="setting">
+          <span><strong>Tweets & Retweets</strong><span>Familiar words for posts & reposts</span></span>
+          <input type="checkbox" role="switch" name="terminology">
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+      </fieldset>
+    </form>
+    <p id="status" role="status" aria-live="polite">Loading preferences…</p>
+    <footer>Local settings. No tracking.</footer>
+  </main>
+</body>
+</html>

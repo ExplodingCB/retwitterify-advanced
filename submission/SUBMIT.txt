@@ -1,0 +1,26 @@
+FIREFOX INSTALLATION AND MOZILLA SUBMISSION
+
+Temporary installation in your existing Firefox:
+1. Open about:debugging#/runtime/this-firefox
+2. Select Load Temporary Add-on.
+3. Choose dist/firefox/manifest.json in your project folder, or the Firefox release ZIP.
+4. Refresh X. Open the extension popup to test the switches.
+This development install lasts until Firefox restarts. Permanent installation requires a Mozilla-signed package.
+
+Public store submission:
+1. Open https://addons.mozilla.org/developers/addon/submit/distribution
+2. Sign in to your Mozilla developer account. Review the developer agreement yourself if prompted.
+3. Choose On this site / list on addons.mozilla.org.
+4. Upload the Firefox ZIP generated in dist/ or downloaded from the GitHub release.
+5. Select desktop Windows, macOS and Linux. Leave Android unselected for this initial release.
+6. Runtime code is already readable, unminified JavaScript, so no separate source-code submission should be needed. If Mozilla requests a source bundle, use the included reviewer-source ZIP and its BUILD.txt instructions.
+7. Use listing.txt for the name, summary, description and release notes; privacy-policy.txt for the optional privacy policy; reviewer-notes.txt for private review notes.
+8. Use your own public developer profile. Support website: https://github.com/ExplodingCB/retwitterify-advanced/issues
+9. Review all listing details, then submit. Mozilla controls validation, signing, and review; submission does not guarantee acceptance.
+10. After signing/publication, use the Mozilla listing or signed XPI to install permanently in Firefox.
+
+Before public submission, test the temporary extension in your signed-in Firefox session. If Mozilla requires login credentials for functional review, provide a dedicated test account through their private reviewer channel, not your personal account credentials or the public listing.
+
+Official instructions:
+https://extensionworkshop.com/documentation/publish/submitting-an-add-on/
+https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/

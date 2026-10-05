@@ -1,0 +1,51 @@
+NAME
+ReTwitterify Advanced
+
+SUGGESTED SLUG
+retwitterify-advanced
+
+SUMMARY
+Restore Twitter branding on X: blue birds, Twitter headers and tab titles, plus familiar Tweet and Retweet labels.
+
+DESCRIPTION
+Make X feel more like Twitter again.
+
+ReTwitterify Advanced restores Twitter branding across the English X web interface:
+
+• Twitter in site headers, browser tab titles, navigation, and supported interface labels.
+• Blue bird logos and browser tab icons, including the redesigned public login page.
+• Tweet and Retweet wording for post and repost controls.
+• Updates as interface content loads and changes.
+• Separate switches for branding, bird logos, and terminology, plus a master pause switch.
+
+The extension is designed to leave tweet bodies, recognized profile/name fields, direct-message content, and text you are writing unchanged. Website addresses and link destinations remain unchanged. X’s experiments or future interface changes may require additional updates.
+
+Everything runs locally. ReTwitterify Advanced stores only four appearance preferences in your browser and makes no analytics or telemetry requests. After installing, refresh your open X tabs.
+
+Works on x.com and twitter.com, including their www and mobile subdomains. English interface wording is supported. Other websites and embedded tweets are outside its scope.
+
+Inspired by Xenoreaper’s ReTwitterify, with a new replacement engine, expanded wording coverage, live settings, and support for newer logos. Bird geometry is adapted under the Mozilla Public License 2.0.
+Original project: https://github.com/Xenoreaper/ReTwitterify
+
+Independent project. Not affiliated with X or Twitter.
+
+CATEGORY SUGGESTIONS
+Appearance; Social & Communication (choose matching categories offered by AMO)
+
+LICENSE
+Mozilla Public License 2.0
+
+PAYMENT
+No payment required.
+
+PLATFORMS
+Firefox desktop: Windows, macOS, Linux. Do not select Android for this initial release; mobile was not tested.
+
+RELEASE NOTES
+Initial Advanced release: event-driven branding updates, modern logo support, Tweet/Retweet terminology, reversible preferences, and bundled icons.
+
+HOMEPAGE
+https://github.com/ExplodingCB/retwitterify-advanced
+
+SUPPORT WEBSITE
+https://github.com/ExplodingCB/retwitterify-advanced/issues

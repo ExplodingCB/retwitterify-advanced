@@ -1,0 +1,10 @@
+ReTwitterify Advanced Privacy Policy
+Effective date: October 4, 2026
+
+ReTwitterify Advanced processes the current X/Twitter page locally in your browser to change its visible branding and interface labels. The extension does not send page content, account details, messages, browsing history, identifiers, or usage data to its developer or any third party.
+
+It stores four boolean appearance preferences using Firefox’s local extension storage: whether the extension is enabled, whether Twitter wording is enabled, whether bird logos are enabled, and whether Tweet/Retweet wording is enabled. These preferences are not synchronized by the extension or transmitted to a server.
+
+The extension includes all of its own code and icons. It contains no analytics, advertising, telemetry, or remote-code loading. Its changes do not alter the data practices of X/Twitter or Mozilla; those services remain governed by their respective policies.
+
+You can change preferences from the extension popup. Removing the extension removes its local extension storage according to Firefox’s normal uninstall behavior.

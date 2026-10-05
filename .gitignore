@@ -1,0 +1,12 @@
+node_modules/
+dist/
+artifacts/
+*.log
+submission/*.zip
+submission/SHA256SUMS.txt
+submission/store-icon-128.png
+.env
+.env.*
+!.env.example
+*.pem
+*.key

@@ -1,0 +1,23 @@
+ReTwitterify Advanced 2.0.0
+
+Purpose: locally restore Twitter branding and familiar Tweet/Retweet terminology on the English X website. No network transmission or data collection by the extension. storage is used only for four boolean local preferences.
+
+Source: all runtime JavaScript is present as readable, unminified source in the submitted ZIP. No transpilation, bundling, obfuscation, remote code, third-party runtime libraries, or build step is required to review the executable code. Build tooling copies these files unchanged and rasterizes the included bird SVG into PNG icons. License and original-project attribution are included.
+
+Public test:
+1. Install the extension and visit https://x.com/ in a new tab. Refresh any tab that was open before installation.
+2. On the public login page, verify the tab title uses Twitter and recognized X logos are blue birds.
+3. Open the extension popup and turn off Bring back Twitter. Verify the original page branding returns.
+4. Re-enable it. Toggle Twitter everywhere and The blue bird independently.
+
+Authenticated test, if a reviewer has an X test account:
+1. Visit Home and navigate to other sections. Browser titles should keep notification counts and use Twitter.
+2. Post/Repost interface buttons should display Tweet/Retweet with the terminology option enabled.
+3. Tweet bodies and text being composed should retain their original wording.
+4. Turn the extension off through its popup and verify the original labels return.
+
+Current validation: 16 automated DOM/storage/popup regression tests passed. Public login branding was inspected in a browser. Live authenticated Firefox end-to-end testing is not yet complete. No account credentials are included. If authenticated credentials are required for review, the submitter must provide a dedicated test account through Mozilla's private reviewer channel.
+
+Limitations: English interface wording; top-level x.com/twitter.com and their www/mobile hosts; no changes to addresses or embedded tweets on unrelated sites. X markup experiments may require selector updates.
+
+This is a substantially rewritten modernization inspired by https://github.com/Xenoreaper/ReTwitterify. Its bird geometry is used under MPL-2.0 with attribution. The new engine adds scoped text replacement, event-driven DOM updates, preservation/restoration of modified values, and local feature controls.
