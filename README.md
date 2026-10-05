@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ExplodingCB/retwitterify-advanced/releases/latest"><img src="https://img.shields.io/github/v/release/ExplodingCB/retwitterify-advanced?label=release" alt="Latest release"></a>
+  <a href="https://github.com/ExplodingCB/retwitterify-advanced/releases/latest"><img src="https://img.shields.io/github/v/release/ExplodingCB/retwitterify-advanced?label=release&amp;sort=semver&amp;cacheSeconds=300" alt="Latest release"></a>
   <img src="https://img.shields.io/badge/platform-Firefox%20%7C%20Chromium-1DA1F2" alt="Firefox and Chromium">
   <img src="https://img.shields.io/badge/built%20with-JavaScript-F7DF1E" alt="Built with JavaScript">
   <a href="LICENSE"><img src="https://img.shields.io/github/license/ExplodingCB/retwitterify-advanced" alt="MPL-2.0 license"></a>
