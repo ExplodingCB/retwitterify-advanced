@@ -1,5 +1,9 @@
 Bring back Twitter names, blue birds, Tweets and Retweets on the modern X website.
 
+## What's new in 2.2.1
+
+- The 128 pixel icon follows Chrome Web Store guidelines (96 pixel artwork with transparent padding), ahead of the Chrome Web Store listing.
+
 ## What's new in 2.2.0
 
 - ReTwitterify Advanced is now **Birdify**, with a new icon of its own. Firefox treats it as the same add-on, so existing installs update normally and keep their settings.

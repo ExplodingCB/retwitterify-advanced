@@ -7,8 +7,8 @@ on:
   # creating its v* tag.
   workflow_dispatch:
     inputs:
-      amo_only:
-        description: Skip the GitHub release and only submit to addons.mozilla.org
+      stores_only:
+        description: Skip the GitHub release and only submit to the browser stores
         type: boolean
         default: false
 
@@ -29,7 +29,7 @@ jobs:
       - run: npm ci
       - run: npm run submission
       - name: Publish release
-        if: ${{ !inputs.amo_only }}
+        if: ${{ !inputs.stores_only }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -49,3 +49,16 @@ jobs:
           AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
           AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
         run: npm run publish:amo
+      # Submits to the Chrome Web Store once its five CWS_* repository secrets exist.
+      - name: Check for Chrome Web Store credentials
+        id: cws
+        run: echo "configured=${{ secrets.CWS_CLIENT_ID != '' && secrets.CWS_CLIENT_SECRET != '' && secrets.CWS_REFRESH_TOKEN != '' && secrets.CWS_PUBLISHER_ID != '' && secrets.CWS_ITEM_ID != '' }}" >> "$GITHUB_OUTPUT"
+      - name: Submit to the Chrome Web Store
+        if: steps.cws.outputs.configured == 'true'
+        env:
+          CWS_CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CWS_CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          CWS_REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+          CWS_PUBLISHER_ID: ${{ secrets.CWS_PUBLISHER_ID }}
+          CWS_ITEM_ID: ${{ secrets.CWS_ITEM_ID }}
+        run: npm run publish:chrome

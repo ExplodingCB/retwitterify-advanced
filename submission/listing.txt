@@ -43,7 +43,7 @@ PLATFORMS
 Firefox desktop: Windows, macOS, Linux. Do not select Android for this initial release; mobile was not tested.
 
 RELEASE NOTES
-2.2.0: ReTwitterify Advanced is now Birdify, with a new icon. Also includes 2.1.0: the header bird replaces X's current logo, Premium is Twitter Blue again, Chat and History read Messages and Bookmarks, and Tweet and Retweet are capitalized as Twitter wrote them, including in notifications.
+2.2.1: ReTwitterify Advanced is now Birdify, with a new icon. Also includes 2.1.0: the header bird replaces X's current logo, Premium is Twitter Blue again, Chat and History read Messages and Bookmarks, and Tweet and Retweet are capitalized as Twitter wrote them, including in notifications.
 
 HOMEPAGE
 https://github.com/ExplodingCB/retwitterify-advanced
