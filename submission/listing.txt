@@ -14,6 +14,7 @@ ReTwitterify Advanced restores Twitter branding across the English X web interfa
 
 • Twitter in site headers, browser tab titles, navigation, and supported interface labels.
 • Blue bird logos and browser tab icons, including the redesigned public login page.
+• Twitter Blue instead of Premium, and Messages and Bookmarks instead of Chat and History.
 • Tweet and Retweet wording for post and repost controls.
 • Updates as interface content loads and changes.
 • Separate switches for branding, bird logos, and terminology, plus a master pause switch.
@@ -42,7 +43,7 @@ PLATFORMS
 Firefox desktop: Windows, macOS, Linux. Do not select Android for this initial release; mobile was not tested.
 
 RELEASE NOTES
-Initial Advanced release: event-driven branding updates, modern logo support, Tweet/Retweet terminology, reversible preferences, and bundled icons.
+2.1.0: The header bird now replaces X's current logo, including redrawn versions. Premium is Twitter Blue again, Chat and History read Messages and Bookmarks, and Tweet and Retweet are capitalized as Twitter wrote them, including in notifications. Adds 64 and 96 pixel icons.
 
 HOMEPAGE
 https://github.com/ExplodingCB/retwitterify-advanced

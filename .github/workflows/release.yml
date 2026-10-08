@@ -29,3 +29,13 @@ jobs:
             submission/*reviewer-source*.zip \
             --title "ReTwitterify Advanced ${RELEASE_TAG#v}" \
             --notes-file docs/RELEASE_NOTES.md --verify-tag
+      # Submits to Mozilla once the AMO_JWT_ISSUER and AMO_JWT_SECRET repository secrets exist.
+      - name: Check for AMO credentials
+        id: amo
+        run: echo "configured=${{ secrets.AMO_JWT_ISSUER != '' && secrets.AMO_JWT_SECRET != '' }}" >> "$GITHUB_OUTPUT"
+      - name: Submit to addons.mozilla.org
+        if: steps.amo.outputs.configured == 'true'
+        env:
+          AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
+          AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+        run: npm run publish:amo

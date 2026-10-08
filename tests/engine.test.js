@@ -29,7 +29,7 @@ test("headers, navigation, accessibility labels and placeholders change without 
   assert.equal(document.querySelector("input").value, "X posts");
   assert.equal(document.querySelector("textarea").placeholder, "Tweet your reply");
   assert.equal(document.querySelector("textarea").value, "X posts");
-  assert.equal(document.querySelector("footer").textContent, "© 2026 Twitter Corp.");
+  assert.equal(document.querySelector("footer").textContent, "© 2026 Twitter, Inc.");
 });
 test("keeps tweets, profiles, messages, cards and editable content intact", t => {
   const { document } = setup(t, `<main>
@@ -134,7 +134,7 @@ test("batched additions preserve controls on lazily inserted tweets", async t =>
 test("repost bylines preserve author names and image logos survive source changes", async t => {
   const { document, asset } = setup(t, `<div data-testid="socialContext"><a href="/X">X</a> reposted</div><header><img alt="X" src="/logo.svg"></header>`);
   assert.equal(document.querySelector("a").textContent, "X");
-  assert.equal(document.querySelector('[data-testid="socialContext"]').textContent, "X retweeted");
+  assert.equal(document.querySelector('[data-testid="socialContext"]').textContent, "X Retweeted");
   const logo = document.querySelector("img");
   assert.equal(logo.getAttribute("src"), asset("icons/bird.svg"));
   logo.src = "/new-logo.svg";
@@ -151,4 +151,39 @@ test("repairs all favicon variants and recreates an icon removed by navigation",
   engine.update(api.settings({ enabled: false }));
   assert.equal(document.querySelector('[rel="icon"]'), null);
   assert.equal(document.querySelector('[rel="mask-icon"]').getAttribute("color"), "black");
+});
+test("replaces the logo in its usual places even when X redraws its shape", async t => {
+  const unknown = "M1 2L3 4Z";
+  const { document, api } = setup(t, `<header role="banner"><h1 role="heading"><a href="/home" aria-label="X" role="link"><div><svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="${unknown}"></path></g></svg></div></a></h1>
+    <nav aria-label="Primary"><a href="/i/premium_sign_up" aria-label="Premium"><svg viewBox="0 0 24 24"><path d="${unknown}"></path></svg><span>Premium</span></a>
+    <a href="/i/chat" aria-label="Chat"><span>Chat</span></a><a href="/i/bookmarks" aria-label="History"><span>History</span></a></nav></header>
+    <div id="placeholder"><svg viewBox="0 0 24 24"><path d="M21.742 21.75l-7.563-11.179 7.056-8.321h-2.456Z"></path></svg></div>
+    <article data-testid="tweet"><a href="/X" aria-label="X"><svg><path d="${unknown}"></path></svg></a></article>`);
+  const logo = document.querySelector("h1 path");
+  assert.equal(logo.getAttribute("d"), api.birdPath);
+  assert.equal(document.querySelector("h1 a").getAttribute("aria-label"), "Twitter");
+  assert.equal(document.querySelector("#placeholder path").getAttribute("d"), api.birdPath);
+  assert.equal(document.querySelector("nav path").getAttribute("d"), unknown);
+  assert.equal(document.querySelector("article path").getAttribute("d"), unknown);
+  const [premium, chat, history] = document.querySelectorAll("nav a");
+  assert.equal(premium.getAttribute("aria-label"), "Twitter Blue");
+  assert.equal(premium.textContent, "Twitter Blue");
+  assert.equal(chat.textContent, "Messages");
+  assert.equal(chat.getAttribute("aria-label"), "Messages");
+  assert.equal(history.textContent, "Bookmarks");
+  const late = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  late.innerHTML = `<path d="${unknown}"></path>`;
+  document.querySelector("h1 a").replaceChildren(late);
+  await settle();
+  assert.equal(late.querySelector("path").getAttribute("d"), api.birdPath);
+});
+test("notification rows change activity wording but not names or quoted tweets", t => {
+  const { document } = setup(t, `<article data-testid="notification"><a href="/postmalone"><span>Post Malone</span></a><span> and 2 others reposted your post</span>
+    <span>New post notifications for </span><a href="/X">X</a><div data-testid="tweetText">your post on X</div><button aria-label="Repost">Repost</button></article>`);
+  const spans = document.querySelectorAll("article > span");
+  assert.equal(document.querySelector("a").textContent, "Post Malone");
+  assert.equal(spans[0].textContent, " and 2 others Retweeted your Tweet");
+  assert.equal(spans[1].textContent, "New Tweet notifications for ");
+  assert.equal(document.querySelector('[data-testid="tweetText"]').textContent, "your post on X");
+  assert.equal(document.querySelector("button").textContent, "Retweet");
 });

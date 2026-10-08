@@ -22,11 +22,15 @@
 ## Features
 
 - **Twitter in the interface.** Headers, browser tab titles, navigation, dialogs,
-  and supported labels use Twitter again. `X Premium` becomes `Twitter Premium`.
-- **The blue bird.** Restores recognizable navigation, loading and login logos,
-  including the newer layered SVG, along with browser tab icons.
+  and supported labels use Twitter again. `Premium` becomes `Twitter Blue`,
+  `X Pro` becomes `TweetDeck`, and the footer reads `Twitter, Inc.`
+- **The blue bird.** Restores navigation, loading and login logos, along with
+  browser tab icons. The header logo is found by where it sits on the page, so it
+  is replaced even when X changes the shape of its SVG.
 - **Tweets and Retweets.** Familiar wording for post/repost buttons, tabs, counts,
-  and menu actions.
+  menu actions and notifications, capitalized the way Twitter wrote them:
+  `Show 31 Tweets`, `Quote Tweet`, `Undo Retweet`. The renamed `Chat` and `History` navigation items read
+  `Messages` and `Bookmarks` again.
 - **Keeps up with the page.** Watches for changes as you navigate and scroll;
   there is no polling loop constantly rescanning the site.
 - **Your choice.** Separate switches for names, logos and terminology. A master
@@ -73,9 +77,9 @@ Open X as usual. Click the extension's bird icon to choose what comes back:
 | Setting | What it changes |
 |---|---|
 | **Bring back Twitter** | Pauses or resumes all changes |
-| **Twitter everywhere** | Headers, browser tab titles, and supported interface wording |
+| **Twitter everywhere** | Headers, browser tab titles, Twitter Blue, and supported interface wording |
 | **The blue bird** | Recognized site logos, favicons, and touch icons |
-| **Tweets & Retweets** | Post/repost terminology in interface controls |
+| **Tweets & Retweets** | Post/repost terminology, plus Messages and Bookmarks in navigation |
 
 Settings apply to open tabs with the extension loaded. Refresh tabs opened before
 installation. If you disable or uninstall the extension through the browser,
@@ -163,8 +167,15 @@ To prepare the same files locally:
 npm run submission
 ```
 
-Update both `package.json` and `extension/manifest.json`, refresh the lockfile and
-`docs/RELEASE_NOTES.md`, then tag that version. GitHub releases do not sign Firefox
+Update both `package.json` and `extension/manifest.json`, refresh the lockfile,
+`docs/RELEASE_NOTES.md` and the release notes in `submission/listing.txt`, then tag
+that version.
+
+When the `AMO_JWT_ISSUER` and `AMO_JWT_SECRET` repository secrets hold an
+[addons.mozilla.org API key](https://addons.mozilla.org/developers/addon/api/key/),
+the release workflow also uploads the listing icon and submits the Firefox package
+to Mozilla for review. `npm run publish:amo` does the same locally with those
+variables set; `node scripts/amo.js --icon-only` sets just the icon. GitHub releases do not sign Firefox
 extensions. The [Mozilla submission guide](submission/SUBMIT.txt) covers that
 separate step.
 
@@ -178,6 +189,7 @@ separate step.
 | `extension/popup.*` | Accessible settings, light/dark appearance, save-error recovery |
 | `scripts/build.js` | Icons and browser packages |
 | `scripts/submission.js` | Reviewer source archive and release checksums |
+| `scripts/amo.js` | Listing icon upload and version submission to addons.mozilla.org |
 | `tests/` | Regression tests and local visual fixture |
 | `submission/` | Store listing text, privacy policy, and reviewer instructions |
 

@@ -1,6 +1,6 @@
 {
   "name": "retwitterify-advanced",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "type": "module",
   "description": "Restore Twitter branding on the modern X website.",
@@ -16,7 +16,8 @@
     "build": "node scripts/build.js",
     "preview": "node scripts/preview.js",
     "lint:firefox": "addons-linter dist/firefox --output json",
-    "submission": "npm test && npm run build && npm run lint:firefox && node scripts/submission.js"
+    "submission": "npm test && npm run build && npm run lint:firefox && node scripts/submission.js",
+    "publish:amo": "node scripts/amo.js"
   },
   "engines": {
     "node": ">=22"
