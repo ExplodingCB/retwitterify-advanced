@@ -157,7 +157,10 @@ refresh X. Contributions and focused regression tests are welcome; see
 
 ## Releasing
 
-Pushing a `v*` tag runs `.github/workflows/release.yml`. It checks the version,
+Pushing a `v*` tag runs `.github/workflows/release.yml`. Running the workflow by
+hand from the Actions tab does the same for the version in
+`extension/manifest.json` and creates its tag; its `amo_only` option skips the
+GitHub release and only submits to Mozilla. It checks the version,
 tests, builds both browser packages, runs Mozilla's validator, and publishes a
 GitHub release with the ZIPs, reviewer source, and `SHA256SUMS.txt`.
 

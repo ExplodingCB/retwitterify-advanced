@@ -3,6 +3,14 @@ name: Release
 on:
   push:
     tags: ["v*"]
+  # Releases the version in extension/manifest.json from the chosen branch,
+  # creating its v* tag.
+  workflow_dispatch:
+    inputs:
+      amo_only:
+        description: Skip the GitHub release and only submit to addons.mozilla.org
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -21,14 +29,16 @@ jobs:
       - run: npm ci
       - run: npm run submission
       - name: Publish release
+        if: ${{ !inputs.amo_only }}
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ github.ref_name }}
         run: |
+          RELEASE_TAG="v$(node -p 'require("./extension/manifest.json").version')"
+          if [ "$GITHUB_REF_TYPE" = tag ]; then target=--verify-tag; else target="--target=$GITHUB_SHA"; fi
           gh release create "$RELEASE_TAG" dist/*.zip dist/SHA256SUMS.txt \
             submission/*reviewer-source*.zip \
             --title "ReTwitterify Advanced ${RELEASE_TAG#v}" \
-            --notes-file docs/RELEASE_NOTES.md --verify-tag
+            --notes-file docs/RELEASE_NOTES.md "$target"
       # Submits to Mozilla once the AMO_JWT_ISSUER and AMO_JWT_SECRET repository secrets exist.
       - name: Check for AMO credentials
         id: amo
