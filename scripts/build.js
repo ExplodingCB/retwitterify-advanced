@@ -12,7 +12,7 @@ vm.runInContext(await readFile(join(extension, "rules.js"), "utf8"), context);
 const bird = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="310 310 370 370"><path fill="#1da1f2" d="${context.ReTwitterify.birdPath}"/></svg>`;
 await mkdir(join(extension, "icons"), { recursive: true });
 await writeFile(join(extension, "icons", "bird.svg"), bird);
-for (const size of [16, 32, 48, 128, 192]) {
+for (const size of [16, 32, 48, 64, 96, 128, 192]) {
   await sharp(Buffer.from(bird)).resize(size, size).png().toFile(join(extension, "icons", `icon-${size}.png`));
 }
 const manifest = JSON.parse(await readFile(join(extension, "manifest.json"), "utf8"));

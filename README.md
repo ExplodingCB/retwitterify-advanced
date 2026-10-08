@@ -22,11 +22,13 @@
 ## Features
 
 - **Twitter in the interface.** Headers, browser tab titles, navigation, dialogs,
-  and supported labels use Twitter again. `X Premium` becomes `Twitter Premium`.
-- **The blue bird.** Restores recognizable navigation, loading and login logos,
-  including the newer layered SVG, along with browser tab icons.
+  and supported labels use Twitter again. `Premium` becomes `Twitter Blue`.
+- **The blue bird.** Restores navigation, loading and login logos, along with
+  browser tab icons. The header logo is found by where it sits on the page, so it
+  is replaced even when X changes the shape of its SVG.
 - **Tweets and Retweets.** Familiar wording for post/repost buttons, tabs, counts,
-  and menu actions.
+  and menu actions. The renamed `Chat` and `History` navigation items read
+  `Messages` and `Bookmarks` again.
 - **Keeps up with the page.** Watches for changes as you navigate and scroll;
   there is no polling loop constantly rescanning the site.
 - **Your choice.** Separate switches for names, logos and terminology. A master
@@ -73,9 +75,9 @@ Open X as usual. Click the extension's bird icon to choose what comes back:
 | Setting | What it changes |
 |---|---|
 | **Bring back Twitter** | Pauses or resumes all changes |
-| **Twitter everywhere** | Headers, browser tab titles, and supported interface wording |
+| **Twitter everywhere** | Headers, browser tab titles, Twitter Blue, and supported interface wording |
 | **The blue bird** | Recognized site logos, favicons, and touch icons |
-| **Tweets & Retweets** | Post/repost terminology in interface controls |
+| **Tweets & Retweets** | Post/repost terminology, plus Messages and Bookmarks in navigation |
 
 Settings apply to open tabs with the extension loaded. Refresh tabs opened before
 installation. If you disable or uninstall the extension through the browser,

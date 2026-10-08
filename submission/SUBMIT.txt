@@ -19,6 +19,13 @@ Public store submission:
 9. Review all listing details, then submit. Mozilla controls validation, signing, and review; submission does not guarantee acceptance.
 10. After signing/publication, use the Mozilla listing or signed XPI to install permanently in Firefox.
 
+Listing icon:
+AMO does not reliably take the listing icon from manifest.json; without an upload the listing shows the default green puzzle piece.
+1. Run npm run submission, or download store-icon-128.png from the GitHub release.
+2. Open https://addons.mozilla.org/developers/addons and choose Edit Product Page for ReTwitterify Advanced.
+3. In the Media section, upload store-icon-128.png as the add-on icon and save.
+4. The public listing can take a few minutes to refresh its cached icon.
+
 Before public submission, test the temporary extension in your signed-in Firefox session. If Mozilla requires login credentials for functional review, provide a dedicated test account through their private reviewer channel, not your personal account credentials or the public listing.
 
 Official instructions:

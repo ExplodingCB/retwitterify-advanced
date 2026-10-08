@@ -23,7 +23,12 @@
   ].join(",");
   const attributes = ["aria-label", "title", "placeholder", "alt"];
   const svgNS = "http://www.w3.org/2000/svg";
-  const xPaths = ["M18.2442.25h3.308", "M18.9011.153h3.68", "M285.38207.711L462.9541.5"];
+  const xPaths = ["M18.2442.25h3.308", "M18.9011.153h3.68", "M21.74221.75l-7.563", "M285.38207.711L462.9541.5"];
+  // Places that only ever hold the site logo, whatever shape X draws there next.
+  const logoSlots = [
+    'a[aria-label="X"]', 'a[aria-label="Twitter"]', 'h1 a[href="/home"]', 'h1 a[href="/"]',
+    '[role="banner"] h1', "#placeholder"
+  ].join(",");
 
   function start(document, initialOptions, assetURL) {
     const win = document.defaultView;
@@ -74,7 +79,7 @@
       }
       // Whole, known site labels in otherwise unlabelled React spans.
       const text = element.textContent.trim();
-      return /^(?:X|X Premium\+?|X Pro|X for (?:Business|Professionals)|About X|Search X|Join X today\.?|New to X\??|Sign (?:in|up) (?:to|for) X|©\s*\d{4}\s+X Corp\.?|\d[\d,.KMk]* (?:posts?|reposts?)|(?:Post|Posts|Repost|Reposts|Quote|Quote post|Post your reply|Post your answer|What's happening\?))$/.test(text) ||
+      return /^(?:X|X Premium\+?|Premium\+?|Subscribe to Premium|Chat|History|X Pro|X for (?:Business|Professionals)|About X|Search X|Join X today\.?|New to X\??|Sign (?:in|up) (?:to|for) X|©\s*\d{4}\s+X Corp\.?|\d[\d,.KMk]* (?:posts?|reposts?)|(?:Post|Posts|Repost|Reposts|Quote|Quote post|Post your reply|Post your answer|What's happening\?))$/.test(text) ||
         /\b(?:on|to|from|with|about|of|for|using|Join) X(?:\b|[’'])/.test(text) ||
         /^X(?:[’']s| (?:Premium|Pro|Corp|Help|Ads|API|Analytics))\b/.test(text);
     }
@@ -98,6 +103,7 @@
       const label = svg.getAttribute("aria-label") || "";
       const icon = svg.getAttribute("data-icon") || "";
       if (/^(?:X|X logo|Twitter|Twitter logo)$/i.test(label) || /(?:^|-)logo-(?:x|twitter)(?:-|$)/.test(icon)) return true;
+      if (svg.closest(logoSlots)) return true;
       return Array.from(svg.querySelectorAll("path[d]")).some(path => {
         const d = path.getAttribute("d").replace(/[\s,]+/g, "");
         return xPaths.some(prefix => d.startsWith(prefix));

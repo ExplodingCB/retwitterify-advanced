@@ -152,3 +152,28 @@ test("repairs all favicon variants and recreates an icon removed by navigation",
   assert.equal(document.querySelector('[rel="icon"]'), null);
   assert.equal(document.querySelector('[rel="mask-icon"]').getAttribute("color"), "black");
 });
+test("replaces the logo in its usual places even when X redraws its shape", async t => {
+  const unknown = "M1 2L3 4Z";
+  const { document, api } = setup(t, `<header role="banner"><h1 role="heading"><a href="/home" aria-label="X" role="link"><div><svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="${unknown}"></path></g></svg></div></a></h1>
+    <nav aria-label="Primary"><a href="/i/premium_sign_up" aria-label="Premium"><svg viewBox="0 0 24 24"><path d="${unknown}"></path></svg><span>Premium</span></a>
+    <a href="/i/chat" aria-label="Chat"><span>Chat</span></a><a href="/i/bookmarks" aria-label="History"><span>History</span></a></nav></header>
+    <div id="placeholder"><svg viewBox="0 0 24 24"><path d="M21.742 21.75l-7.563-11.179 7.056-8.321h-2.456Z"></path></svg></div>
+    <article data-testid="tweet"><a href="/X" aria-label="X"><svg><path d="${unknown}"></path></svg></a></article>`);
+  const logo = document.querySelector("h1 path");
+  assert.equal(logo.getAttribute("d"), api.birdPath);
+  assert.equal(document.querySelector("h1 a").getAttribute("aria-label"), "Twitter");
+  assert.equal(document.querySelector("#placeholder path").getAttribute("d"), api.birdPath);
+  assert.equal(document.querySelector("nav path").getAttribute("d"), unknown);
+  assert.equal(document.querySelector("article path").getAttribute("d"), unknown);
+  const [premium, chat, history] = document.querySelectorAll("nav a");
+  assert.equal(premium.getAttribute("aria-label"), "Twitter Blue");
+  assert.equal(premium.textContent, "Twitter Blue");
+  assert.equal(chat.textContent, "Messages");
+  assert.equal(chat.getAttribute("aria-label"), "Messages");
+  assert.equal(history.textContent, "Bookmarks");
+  const late = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  late.innerHTML = `<path d="${unknown}"></path>`;
+  document.querySelector("h1 a").replaceChildren(late);
+  await settle();
+  assert.equal(late.querySelector("path").getAttribute("d"), api.birdPath);
+});

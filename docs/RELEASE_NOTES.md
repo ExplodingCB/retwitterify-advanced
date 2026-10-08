@@ -1,5 +1,12 @@
 Bring back Twitter names, blue birds, Tweets and Retweets on the modern X website.
 
+## What's new in 2.1.0
+
+- The header bird replaces X's current navigation logo. The logo is now recognized by its place on the page, not only its exact SVG shape, so a redrawn X logo is still replaced.
+- `Premium` and `X Premium` read `Twitter Blue`, in navigation, buttons and tab titles.
+- The renamed `Chat` and `History` navigation items read `Messages` and `Bookmarks` again.
+- Adds 64 and 96 pixel icons for Firefox's add-on manager.
+
 ## Downloads
 
 - **Firefox 142+:** download the Firefox ZIP, open `about:debugging#/runtime/this-firefox`, and choose **Load Temporary Add-on**. Select the ZIP or its extracted `manifest.json`, then refresh X.
