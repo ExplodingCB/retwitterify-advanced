@@ -5,7 +5,7 @@ import vm from "node:vm";
 
 const context = vm.createContext({});
 vm.runInContext(readFileSync(new URL("../extension/rules.js", import.meta.url), "utf8"), context);
-const api = context.ReTwitterify;
+const api = context.Birdify;
 
 test("restores brand names and familiar terminology with matching case", () => {
   for (const [before, after] of [

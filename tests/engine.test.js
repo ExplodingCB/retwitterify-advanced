@@ -9,10 +9,10 @@ function setup(t, html, settings) {
   const dom = new JSDOM(html, { url: "https://x.com/home", runScripts: "outside-only" });
   const { window } = dom;
   sources.forEach(source => window.eval(source));
-  const asset = path => `chrome-extension://retwitterify/${path}`;
-  const engine = window.ReTwitterify.start(window.document, settings, asset);
+  const asset = path => `chrome-extension://birdify/${path}`;
+  const engine = window.Birdify.start(window.document, settings, asset);
   t.after(() => { engine.stop(); window.close(); });
-  return { window, document: window.document, engine, asset, api: window.ReTwitterify };
+  return { window, document: window.document, engine, asset, api: window.Birdify };
 }
 const settle = () => new Promise(resolve => setTimeout(resolve, 65));
 
@@ -76,7 +76,7 @@ test("updates inserted and edited UI, favicon and title after client-side naviga
   button.click();
   assert.equal(clicks, 1);
   assert.equal(document.title, "(2) Notifications / Twitter");
-  assert.equal(icon.href, asset("icons/icon-32.png"));
+  assert.equal(icon.href, asset("icons/bird-32.png"));
   button.firstChild.data = "Repost";
   await settle();
   assert.equal(button.textContent, "Retweet");
@@ -143,11 +143,11 @@ test("repost bylines preserve author names and image logos survive source change
 });
 test("repairs all favicon variants and recreates an icon removed by navigation", async t => {
   const { document, engine, api, asset } = setup(t, '<link rel="icon" href="a.ico"><link rel="apple-touch-icon" href="a.png"><link rel="mask-icon" color="black" href="a.svg">');
-  assert.equal(document.querySelector('[rel="apple-touch-icon"]').href, asset("icons/icon-192.png"));
+  assert.equal(document.querySelector('[rel="apple-touch-icon"]').href, asset("icons/bird-192.png"));
   assert.equal(document.querySelector('[rel="mask-icon"]').href, asset("icons/bird.svg"));
   document.querySelector('[rel="icon"]').remove();
   await settle();
-  assert.equal(document.querySelector('[rel="icon"]').href, asset("icons/icon-32.png"));
+  assert.equal(document.querySelector('[rel="icon"]').href, asset("icons/bird-32.png"));
   engine.update(api.settings({ enabled: false }));
   assert.equal(document.querySelector('[rel="icon"]'), null);
   assert.equal(document.querySelector('[rel="mask-icon"]').getAttribute("color"), "black");

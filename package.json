@@ -1,6 +1,6 @@
 {
-  "name": "retwitterify-advanced",
-  "version": "2.1.0",
+  "name": "birdify",
+  "version": "2.2.0",
   "private": true,
   "type": "module",
   "description": "Restore Twitter branding on the modern X website.",

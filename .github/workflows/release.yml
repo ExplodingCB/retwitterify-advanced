@@ -37,7 +37,7 @@ jobs:
           if [ "$GITHUB_REF_TYPE" = tag ]; then target=--verify-tag; else target="--target=$GITHUB_SHA"; fi
           gh release create "$RELEASE_TAG" dist/*.zip dist/SHA256SUMS.txt \
             submission/*reviewer-source*.zip \
-            --title "ReTwitterify Advanced ${RELEASE_TAG#v}" \
+            --title "Birdify ${RELEASE_TAG#v}" \
             --notes-file docs/RELEASE_NOTES.md "$target"
       # Submits to Mozilla once the AMO_JWT_ISSUER and AMO_JWT_SECRET repository secrets exist.
       - name: Check for AMO credentials

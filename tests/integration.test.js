@@ -16,7 +16,7 @@ test("a settings change during startup takes precedence over a stale storage rea
       onChanged: { addListener: value => { listener = value; } } }
   };
   dom.window.eval(read("rules.js"));
-  dom.window.ReTwitterify.start = (_document, options) => {
+  dom.window.Birdify.start = (_document, options) => {
     calls.push(options.enabled);
     return { update: options => calls.push(options.enabled) };
   };

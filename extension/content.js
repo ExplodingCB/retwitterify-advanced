@@ -6,9 +6,9 @@
   let engine;
   let revision = 0;
   const apply = value => {
-    const options = ReTwitterify.settings(value);
+    const options = Birdify.settings(value);
     if (engine) engine.update(options);
-    else engine = ReTwitterify.start(document, options, path => extension.runtime.getURL(path));
+    else engine = Birdify.start(document, options, path => extension.runtime.getURL(path));
   };
   // Register before reading, so a settings change during startup cannot be lost.
   extension.storage.onChanged.addListener((changes, area) => {
@@ -20,7 +20,7 @@
   extension.storage.local.get("settings").then(result => {
     if (revision === readingRevision) apply(result.settings);
   }).catch(error => {
-    console.warn("ReTwitterify: could not read settings; using defaults.", error);
+    console.warn("Birdify: could not read settings; using defaults.", error);
     if (revision === readingRevision) apply();
   });
 })();

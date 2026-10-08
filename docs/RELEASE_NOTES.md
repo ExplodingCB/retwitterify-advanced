@@ -1,5 +1,10 @@
 Bring back Twitter names, blue birds, Tweets and Retweets on the modern X website.
 
+## What's new in 2.2.0
+
+- ReTwitterify Advanced is now **Birdify**, with a new icon of its own. Firefox treats it as the same add-on, so existing installs update normally and keep their settings.
+- Release files are now named `birdify-firefox-<version>.zip`, `birdify-chromium-<version>.zip` and `birdify-reviewer-source-<version>.zip`.
+
 ## What's new in 2.1.0
 
 - The header bird replaces X's current navigation logo. The logo is now recognized by its place on the page, not only its exact SVG shape, so a redrawn X logo is still replaced.
@@ -20,7 +25,7 @@ Disable the original ReTwitterify extension before using this version. The popup
 
 ## Status
 
-These are unsigned development builds. Firefox's temporary installation ends when the browser restarts. Mozilla signing and store publication are still pending.
+Firefox users should install Birdify from addons.mozilla.org, which updates automatically once Mozilla approves a version. The ZIPs here are unsigned builds for testing; Firefox's temporary installation ends when the browser restarts.
 
 The public login markup and a local browser fixture were checked. Automated tests cover text rules, dynamic DOM updates, settings, restoration, and preservation of recognized user-content fields. Live authenticated Firefox behavior still needs verification.
 
