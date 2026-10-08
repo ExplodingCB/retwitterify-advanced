@@ -29,7 +29,7 @@ test("headers, navigation, accessibility labels and placeholders change without 
   assert.equal(document.querySelector("input").value, "X posts");
   assert.equal(document.querySelector("textarea").placeholder, "Tweet your reply");
   assert.equal(document.querySelector("textarea").value, "X posts");
-  assert.equal(document.querySelector("footer").textContent, "© 2026 Twitter Corp.");
+  assert.equal(document.querySelector("footer").textContent, "© 2026 Twitter, Inc.");
 });
 test("keeps tweets, profiles, messages, cards and editable content intact", t => {
   const { document } = setup(t, `<main>
@@ -134,7 +134,7 @@ test("batched additions preserve controls on lazily inserted tweets", async t =>
 test("repost bylines preserve author names and image logos survive source changes", async t => {
   const { document, asset } = setup(t, `<div data-testid="socialContext"><a href="/X">X</a> reposted</div><header><img alt="X" src="/logo.svg"></header>`);
   assert.equal(document.querySelector("a").textContent, "X");
-  assert.equal(document.querySelector('[data-testid="socialContext"]').textContent, "X retweeted");
+  assert.equal(document.querySelector('[data-testid="socialContext"]').textContent, "X Retweeted");
   const logo = document.querySelector("img");
   assert.equal(logo.getAttribute("src"), asset("icons/bird.svg"));
   logo.src = "/new-logo.svg";
@@ -176,4 +176,14 @@ test("replaces the logo in its usual places even when X redraws its shape", asyn
   document.querySelector("h1 a").replaceChildren(late);
   await settle();
   assert.equal(late.querySelector("path").getAttribute("d"), api.birdPath);
+});
+test("notification rows change activity wording but not names or quoted tweets", t => {
+  const { document } = setup(t, `<article data-testid="notification"><a href="/postmalone"><span>Post Malone</span></a><span> and 2 others reposted your post</span>
+    <span>New post notifications for </span><a href="/X">X</a><div data-testid="tweetText">your post on X</div><button aria-label="Repost">Repost</button></article>`);
+  const spans = document.querySelectorAll("article > span");
+  assert.equal(document.querySelector("a").textContent, "Post Malone");
+  assert.equal(spans[0].textContent, " and 2 others Retweeted your Tweet");
+  assert.equal(spans[1].textContent, "New Tweet notifications for ");
+  assert.equal(document.querySelector('[data-testid="tweetText"]').textContent, "your post on X");
+  assert.equal(document.querySelector("button").textContent, "Retweet");
 });

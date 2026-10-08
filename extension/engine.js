@@ -88,6 +88,8 @@
       if (!parent || !node.data.trim() || parent.closest("input,textarea") || isBlocked(parent)) return;
       if (parent.tagName === "TITLE" && parent.parentElement === document.head) {
         write(node, "#text", api.replaceTitle(node.data, options));
+      } else if (parent.closest('[data-testid="notification"]') && !parent.closest('a[href],button,[role="button"]')) {
+        write(node, "#text", api.replaceActivity(node.data, options));
       } else if (isUI(parent)) {
         // Repost bylines include people's names alongside site-generated verbs.
         const social = parent.closest('[data-testid="socialContext"]');

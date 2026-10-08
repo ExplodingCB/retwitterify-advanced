@@ -16,7 +16,8 @@
     "build": "node scripts/build.js",
     "preview": "node scripts/preview.js",
     "lint:firefox": "addons-linter dist/firefox --output json",
-    "submission": "npm test && npm run build && npm run lint:firefox && node scripts/submission.js"
+    "submission": "npm test && npm run build && npm run lint:firefox && node scripts/submission.js",
+    "publish:amo": "node scripts/amo.js"
   },
   "engines": {
     "node": ">=22"

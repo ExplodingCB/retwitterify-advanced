@@ -5,6 +5,9 @@ Bring back Twitter names, blue birds, Tweets and Retweets on the modern X websit
 - The header bird replaces X's current navigation logo. The logo is now recognized by its place on the page, not only its exact SVG shape, so a redrawn X logo is still replaced.
 - `Premium` and `X Premium` read `Twitter Blue`, in navigation, buttons and tab titles.
 - The renamed `Chat` and `History` navigation items read `Messages` and `Bookmarks` again.
+- Tweet and Retweet are capitalized the way Twitter wrote them (`Show 31 Tweets`, `Undo Retweet`), and `Quote` reads `Quote Tweet`.
+- Notification rows read "Retweeted your Tweet" instead of "reposted your post". People's names in those rows are left alone.
+- `X Corp.` reads `Twitter, Inc.`, `X Pro` reads `TweetDeck`, and `Premium Business` reads `Verified Organizations`.
 - Adds 64 and 96 pixel icons for Firefox's add-on manager.
 
 ## Downloads

@@ -8,18 +8,22 @@
       [key, typeof value?.[key] === "boolean" ? value[key] : fallback]));
   }
 
-  function matchCase(source, replacement) {
-    if (source === source.toUpperCase()) return replacement.toUpperCase();
-    if (source[0] === source[0].toUpperCase()) return replacement[0].toUpperCase() + replacement.slice(1);
-    return replacement;
-  }
-
   // Preserve displayed URLs, hashtags and handles as well as their destinations.
   const protectedTokens = /(https?:\/\/[^\s]+|www\.[^\s]+|\b(?:[\w-]+\.)+(?:com|org|net|co|io)\b[^\s]*|[@#][\p{L}\p{N}_]+)/gu;
-  const terms = { post: "tweet", posts: "tweets", posted: "tweeted", posting: "tweeting", repost: "retweet", reposts: "retweets", reposted: "retweeted", reposting: "retweeting" };
-  // Renamed navigation items, matched only as a whole label: "Chat" and
-  // "History" are ordinary words elsewhere.
-  const labels = { Chat: "Messages", History: "Bookmarks" };
+  // Twitter always capitalized Tweet and Retweet: "Show 31 Tweets", "Undo Retweet".
+  const terms = { post: "Tweet", posts: "Tweets", posted: "Tweeted", posting: "Tweeting", repost: "Retweet", reposts: "Retweets", reposted: "Retweeted", reposting: "Retweeting" };
+  // Renamed items, matched only as a whole label: "Chat", "History" and
+  // "Quote" are ordinary words elsewhere.
+  const labels = { Chat: "Messages", History: "Bookmarks", Quote: "Quote Tweet", Quotes: "Quote Tweets" };
+  const brand = "(?<![\\p{L}\\p{N}_./@#-])";
+  const products = [
+    [new RegExp(`${brand}X Corp(?:oration)?\\.?(?![\\p{L}\\p{N}_-])`, "gu"), "Twitter, Inc."],
+    [new RegExp(`${brand}X Pro(?![\\p{L}\\p{N}_-])`, "gu"), "TweetDeck"],
+    // Capitalized product names only, so "premium features" stays as written.
+    [new RegExp(`${brand}(?:(?:X|Twitter)\\s+)?Premium Business(?![\\p{L}\\p{N}_-])`, "gu"), "Verified Organizations"],
+    [new RegExp(`${brand}(?:(?:X|Twitter)\\s+)?Premium(?![\\p{L}\\p{N}_-])`, "gu"), "Twitter Blue"],
+    [new RegExp(`${brand}X(?![\\p{L}\\p{N}_/-])`, "gu"), "Twitter"]
+  ];
 
   function replaceUI(text, options = defaults) {
     if (!options.enabled || !text) return text;
@@ -30,16 +34,24 @@
     return text.split(protectedTokens).map((part, index) => {
       if (index % 2) return part;
       if (options.brandText) {
-        // Capitalized product name only, so "premium features" stays as written.
-        part = part.replace(/(?<![\p{L}\p{N}_./@#-])(?:(?:X|Twitter)\s+)?Premium(?![\p{L}\p{N}_-])/gu, "Twitter Blue");
-        part = part.replace(/(?<![\p{L}\p{N}_./@#-])X(?![\p{L}\p{N}_/-])/gu, "Twitter");
+        for (const [pattern, replacement] of products) part = part.replace(pattern, replacement);
       }
       if (options.terminology) {
-        part = part.replace(/\b(?:reposts?|reposted|reposting|posts?|posted|posting)\b/gi,
-          word => matchCase(word, terms[word.toLowerCase()]));
+        part = part.replace(/\b(?:reposts?|reposted|reposting|posts?|posted|posting)\b/gi, word => {
+          const replacement = terms[word.toLowerCase()];
+          return word === word.toUpperCase() ? replacement.toUpperCase() : replacement;
+        });
       }
       return part;
     }).join("");
+  }
+
+  // Notification rows mix people's names with site wording, so only fixed
+  // activity phrases change there: a name like "Post Malone" stays intact.
+  function replaceActivity(text, options = defaults) {
+    if (!options.enabled || !options.terminology || !text) return text;
+    return text.replace(/\b(your|a|new|this|their) (re)?post(s)?\b|\breposted\b/gi,
+      (match, owner, re, plural) => owner ? `${owner} ${re ? "Retweet" : "Tweet"}${plural || ""}` : "Retweeted");
   }
 
   // Titles can contain a person's entire tweet. Only touch the brand suffix,
@@ -65,5 +77,5 @@
   // Bird geometry from Xenoreaper/ReTwitterify (MPL-2.0), see THIRD_PARTY_NOTICES.
   const birdPath = "M630 425A195 195 0 0 1 331 600A142 142 0 0 0 428 570A70 70 0 0 1 370 523A70 70 0 0 0 401 521A70 70 0 0 1 344 455A70 70 0 0 0 372 460A70 70 0 0 1 354 370A195 195 0 0 0 495 442A67 67 0 0 1 611 380A117 117 0 0 0 654 363A65 65 0 0 1 623 401A117 117 0 0 0 662 390A65 65 0 0 1 630 425Z";
 
-  globalThis.ReTwitterify = { defaults, settings, replaceUI, replaceTitle, birdPath };
+  globalThis.ReTwitterify = { defaults, settings, replaceUI, replaceActivity, replaceTitle, birdPath };
 })();

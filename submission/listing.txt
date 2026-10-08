@@ -43,7 +43,7 @@ PLATFORMS
 Firefox desktop: Windows, macOS, Linux. Do not select Android for this initial release; mobile was not tested.
 
 RELEASE NOTES
-2.1.0: The header bird now replaces X's current logo, including redrawn versions. Premium is Twitter Blue again, and Chat and History read Messages and Bookmarks. Adds 64 and 96 pixel icons.
+2.1.0: The header bird now replaces X's current logo, including redrawn versions. Premium is Twitter Blue again, Chat and History read Messages and Bookmarks, and Tweet and Retweet are capitalized as Twitter wrote them, including in notifications. Adds 64 and 96 pixel icons.
 
 HOMEPAGE
 https://github.com/ExplodingCB/retwitterify-advanced
