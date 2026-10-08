@@ -165,8 +165,8 @@ refresh X. Contributions and focused regression tests are welcome; see
 
 Pushing a `v*` tag runs `.github/workflows/release.yml`. Running the workflow by
 hand from the Actions tab does the same for the version in
-`extension/manifest.json` and creates its tag; its `amo_only` option skips the
-GitHub release and only submits to Mozilla. It checks the version,
+`extension/manifest.json` and creates its tag; its `stores_only` option skips the
+GitHub release and only submits to the browser stores. It checks the version,
 tests, builds both browser packages, runs Mozilla's validator, and publishes a
 GitHub release with the ZIPs, reviewer source, and `SHA256SUMS.txt`.
 
@@ -183,7 +183,9 @@ that version.
 When the `AMO_JWT_ISSUER` and `AMO_JWT_SECRET` repository secrets hold an
 [addons.mozilla.org API key](https://addons.mozilla.org/developers/addon/api/key/),
 the release workflow also uploads the listing icon and submits the Firefox package
-to Mozilla for review. `npm run publish:amo` does the same locally with those
+to Mozilla for review. With the five `CWS_*` secrets described in
+[submission/chrome/LISTING.txt](submission/chrome/LISTING.txt), it also submits the
+Chromium package to the Chrome Web Store. `npm run publish:amo` does the same locally with those
 variables set; `node scripts/amo.js --icon-only` sets just the icon. GitHub releases do not sign Firefox
 extensions. The [Mozilla submission guide](submission/SUBMIT.txt) covers that
 separate step.
@@ -199,6 +201,8 @@ separate step.
 | `scripts/build.js` | Icons and browser packages |
 | `scripts/submission.js` | Reviewer source archive and release checksums |
 | `scripts/amo.js` | Listing icon upload and version submission to addons.mozilla.org |
+| `scripts/cws.js` | Version submission to the Chrome Web Store |
+| `scripts/store-images.js` | Chrome Web Store screenshots and promo tiles from `submission/chrome/source` |
 | `tests/` | Regression tests and local visual fixture |
 | `submission/` | Store listing text, privacy policy, and reviewer instructions |
 

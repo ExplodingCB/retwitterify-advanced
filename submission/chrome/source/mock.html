@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home / X</title>
+<link rel="icon" href="x-favicon.svg">
+<!-- Store screenshot fixture: a simplified X layout with fictional people.
+     With ?after, the real extension scripts rewrite it. -->
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #000; color: #e7e9ea; font: 15px Inter, "Segoe UI", Arial, sans-serif; }
+  .tab { display: flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px; background: #202124; color: #e8eaed; font-size: 13px; border-bottom: 1px solid #2f3336; }
+  .tab img { width: 16px; height: 16px; }
+  .tab span { background: #35363a; padding: 6px 12px 6px 8px; border-radius: 8px 8px 0 0; display: flex; gap: 8px; align-items: center; }
+  .app { display: grid; grid-template-columns: 200px 1fr; height: calc(100vh - 38px); }
+  header { padding: 6px 12px; border-right: 1px solid #2f3336; }
+  h1 { margin: 6px 0 10px; }
+  h1 svg { width: 32px; height: 32px; fill: #e7e9ea; margin: 6px; }
+  nav a { display: flex; align-items: center; gap: 14px; color: #e7e9ea; text-decoration: none; font-size: 18px; padding: 9px 8px; }
+  nav i { width: 22px; height: 22px; border: 2px solid #e7e9ea; border-radius: 6px; display: inline-block; }
+  .compose { display: block; text-align: center; margin-top: 12px; background: #eff3f4; color: #0f1419; font-weight: 700; border-radius: 999px; padding: 12px; text-decoration: none; }
+  main { overflow: hidden; }
+  .tabs { display: flex; border-bottom: 1px solid #2f3336; }
+  .tabs [role=tab] { flex: 1; text-align: center; padding: 14px 0; color: #71767b; font-weight: 600; }
+  .tabs [role=tab][aria-selected=true] { color: #e7e9ea; box-shadow: inset 0 -4px #1d9bf0; }
+  .show { text-align: center; color: #1d9bf0; padding: 14px; border-bottom: 1px solid #2f3336; }
+  article { padding: 12px 16px; border-bottom: 1px solid #2f3336; }
+  .social { color: #71767b; font-size: 13px; font-weight: 600; margin: 0 0 4px 52px; }
+  .row { display: flex; gap: 12px; }
+  .avatar { width: 40px; height: 40px; border-radius: 50%; flex: none; }
+  .name { font-weight: 700; } .handle { color: #71767b; }
+  [data-testid=tweetText] { margin: 4px 0 10px; line-height: 1.4; }
+  [role=group] { display: flex; gap: 22px; color: #71767b; font-size: 13px; }
+  [role=group] button { background: none; border: 0; color: inherit; font: inherit; padding: 0; }
+  .menu { position: absolute; background: #000; border-radius: 12px; box-shadow: 0 0 14px rgba(255,255,255,.22); padding: 6px 0; }
+  .menu [role=menuitem] { padding: 11px 18px; font-weight: 700; }
+  .note { padding: 14px 16px; border-bottom: 1px solid #2f3336; }
+  .note b { font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="tab" data-birdify-ignore><span><img id="fav" alt=""><b id="title" style="font-weight:500"></b></span></div>
+<div class="app">
+  <header role="banner">
+    <h1 role="heading"><a href="/home" aria-label="X" role="link"><svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="M21.742 21.75l-7.563-11.179 7.056-8.321h-2.456l-5.691 6.714-4.54-6.714H2.359l7.29 10.776L2.25 21.75h2.456l6.035-7.118 4.818 7.118h6.191-.008zM7.739 3.818L18.81 20.182h-2.447L5.29 3.818h2.447z"/></g></svg></a></h1>
+    <nav aria-label="Primary">
+      <a href="/home"><i></i><span>Home</span></a>
+      <a href="/explore"><i></i><span>Explore</span></a>
+      <a href="/notifications"><i></i><span>Notifications</span></a>
+      <a href="/i/chat" aria-label="Chat"><i></i><span>Chat</span></a>
+      <a href="/i/bookmarks" aria-label="History"><i></i><span>History</span></a>
+      <a href="/i/premium_sign_up" aria-label="Premium"><i></i><span>Premium</span></a>
+      <a href="/profile"><i></i><span>Profile</span></a>
+      <a href="/compose/post" class="compose" aria-label="Post"><span>Post</span></a>
+    </nav>
+  </header>
+  <main>
+    <div class="tabs" role="tablist"><div role="tab" aria-selected="true">For you</div><div role="tab">Following</div></div>
+    <div class="show" role="button"><span>Show 31 posts</span></div>
+    <article data-testid="notification" class="note"><span><a href="/samortiz" style="color:#e7e9ea;text-decoration:none"><b>Sam Ortiz</b></a></span><span> and 2 others reposted your post</span></article>
+    <article data-testid="tweet">
+      <div class="social" data-testid="socialContext"><a href="/samortiz" style="color:inherit;text-decoration:none">Sam Ortiz</a> reposted</div>
+      <div class="row"><div class="avatar" style="background:#f4a261"></div><div>
+        <div data-testid="User-Name"><span class="name">Jamie Rivera</span> <span class="handle">@jamierivera · 2h</span></div>
+        <div data-testid="tweetText">Finally finished the bird feeder. Three sparrows showed up within an hour.</div>
+        <div role="group"><button aria-label="Reply">12</button><button aria-label="Repost" data-testid="retweet">48 reposts</button><button>310 likes</button></div>
+      </div></div>
+    </article>
+    <article data-testid="tweet">
+      <div class="row"><div class="avatar" style="background:#2a9d8f"></div><div>
+        <div data-testid="User-Name"><span class="name">Priya Nair</span> <span class="handle">@priyanair · 5h</span></div>
+        <div data-testid="tweetText">Morning run done before the rain. Coffee next.</div>
+        <div role="group"><button aria-label="Reply">4</button><button aria-label="Repost" data-testid="retweet">9 reposts</button><button>87 likes</button></div>
+      </div></div>
+    </article>
+    <div class="menu" role="menu" style="margin:-14px 0 0 120px"><div role="menuitem"><span>Repost</span></div><div role="menuitem"><span>Quote</span></div></div>
+  </main>
+</div>
+<script>
+  const after = location.search.includes("after");
+  if (location.search.includes("nomenu")) document.querySelector(".menu").remove();
+  function showTab() {
+    document.getElementById("title").textContent = document.title;
+    document.getElementById("fav").src = document.querySelector('link[rel~="icon"]').href;
+  }
+  if (after) {
+    for (const name of ["rules.js", "engine.js"]) document.write(`<script src="/extension/${name}"><\/script>`);
+    addEventListener("load", () => { Birdify.start(document, Birdify.defaults, path => "/extension/" + path); setTimeout(showTab, 50); });
+  } else addEventListener("load", showTab);
+</script>
+</body>
+</html>

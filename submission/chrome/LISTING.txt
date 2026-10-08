@@ -1,0 +1,103 @@
+CHROME WEB STORE SUBMISSION
+
+Package
+Upload birdify-chromium-<version>.zip from the latest GitHub release, or dist/ after npm run build.
+Developer Dashboard: https://chrome.google.com/webstore/devconsole
+Choose New item, upload the ZIP, then fill in the tabs below.
+
+========================================================================
+STORE LISTING TAB
+========================================================================
+
+Description (the summary line comes from manifest.json):
+
+Birdify brings the blue bird back to X.
+
+It restores classic Twitter branding across the English X website:
+
+• The blue bird replaces the X logo in the header, on the loading screen and in your browser tab.
+• Tab titles and interface labels say Twitter again.
+• Post and Repost become Tweet and Retweet, capitalized the way Twitter wrote them: Show 31 Tweets, Quote Tweet, Undo Retweet.
+• Premium becomes Twitter Blue. The renamed Chat and History items read Messages and Bookmarks.
+• Notifications read "Retweeted your Tweet".
+
+You choose what comes back. Separate switches control the Twitter name, the blue bird and Tweet wording, and one switch pauses everything. Turn it off and the page goes back to how X shows it.
+
+Birdify leaves tweets, people's names, direct messages, links and the text you type exactly as written. It updates the page as you scroll and navigate, without polling.
+
+Private by design: everything runs in your browser. Birdify stores four on/off settings locally and sends nothing anywhere. No analytics, no tracking, no account access.
+
+Works on x.com and twitter.com, including their www and mobile subdomains. English interface wording is supported.
+
+Free and open source (MPL-2.0): https://github.com/ExplodingCB/retwitterify-advanced
+
+Birdify is an independent project. It is not affiliated with, endorsed by or sponsored by X Corp. or Twitter. Twitter and X names and logos belong to their respective owners.
+
+Category: Social & Communication if offered; otherwise the closest social or productivity category in the dropdown.
+Language: English
+
+Graphic assets (all in this folder):
+  Store icon:            comes from the ZIP (icons/icon-128.png, 96px artwork with 16px padding)
+  Screenshots 1280x800:  screenshot-1.png (before/after), screenshot-2.png (wording), screenshot-3.png (settings)
+  Small promo tile:      promo-small-440x280.png
+  Marquee promo tile:    promo-marquee-1400x560.png (optional)
+Regenerate them with: CHROME=/path/to/chrome npm run store-images
+
+Official URL: none
+Homepage URL: https://github.com/ExplodingCB/retwitterify-advanced
+Support URL: https://github.com/ExplodingCB/retwitterify-advanced/issues
+Mature content: No
+
+========================================================================
+PRIVACY TAB
+========================================================================
+
+Single purpose description:
+Birdify restores classic Twitter branding and wording on the X website: bird logos, Twitter tab titles and labels, and Tweet/Retweet terminology.
+
+Permission justifications:
+  storage: Saves the user's four on/off appearance settings (master switch, Twitter wording, bird logos, Tweet terminology) in local extension storage.
+  Host permissions (content scripts on x.com, twitter.com and their www/mobile subdomains): The content scripts must run on these pages to change their logos, tab titles and interface labels. They run on no other sites.
+
+Are you using remote code? No, I am not using remote code.
+  All JavaScript is bundled in the package. No scripts, eval or WebAssembly are loaded from elsewhere.
+
+Data usage:
+  Leave every data type unchecked. Birdify does not collect or transmit any user data.
+  Tick all three certifications:
+    I do not sell or transfer user data to third parties, outside of the approved use cases.
+    I do not use or transfer user data for purposes that are unrelated to my item's single purpose.
+    I do not use or transfer user data to determine creditworthiness or for lending purposes.
+
+Privacy policy URL:
+https://github.com/ExplodingCB/retwitterify-advanced/blob/main/submission/privacy-policy.txt
+
+========================================================================
+DISTRIBUTION TAB
+========================================================================
+
+Payments: Free of charge
+Visibility: Public
+Regions: All regions
+
+========================================================================
+TEST INSTRUCTIONS TAB (for reviewers)
+========================================================================
+
+No account is needed. Visit https://x.com/ in a new tab after installing. The tab title, favicon and logo on the public login page show Twitter and the blue bird. Open the toolbar popup and switch off "Bring back Twitter" to restore the original page; switch it on again to reapply. Signed-in pages also show Tweet/Retweet wording on post and repost controls.
+
+========================================================================
+AUTOMATIC UPDATES AFTER THE FIRST VERSION
+========================================================================
+
+After Google approves the first version, later releases can be submitted by the release workflow. Add these repository secrets (GitHub: Settings > Secrets and variables > Actions):
+
+  CWS_PUBLISHER_ID   Publisher ID shown in the Developer Dashboard account settings
+  CWS_ITEM_ID        The item ID (the 32-letter ID in the item's dashboard URL)
+  CWS_CLIENT_ID      OAuth client ID from a Google Cloud project with the Chrome Web Store API enabled
+  CWS_CLIENT_SECRET  That OAuth client's secret
+  CWS_REFRESH_TOKEN  A refresh token for your Google account with the
+                     https://www.googleapis.com/auth/chromewebstore scope
+
+Google's guide covers creating the OAuth client and refresh token:
+https://developer.chrome.com/docs/webstore/using-api

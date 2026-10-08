@@ -1,0 +1,15 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { font-family: Inter, "Segoe UI", Arial, sans-serif; color: #0f1419; background: linear-gradient(160deg, #eaf6ff 0%, #d4ecff 100%); overflow: hidden; }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 26px; letter-spacing: -.01em; }
+.brand img { width: 44px; height: 44px; }
+h1 { font-size: 46px; line-height: 1.08; letter-spacing: -.025em; margin: 0; font-weight: 800; }
+p.lead { font-size: 21px; line-height: 1.45; color: #3c4a57; margin: 0; }
+iframe { border: 0; display: block; background: #000; }
+.frame { border-radius: 14px; overflow: hidden; box-shadow: 0 18px 50px rgba(15, 50, 90, .25), 0 0 0 1px rgba(15, 50, 90, .08); }
+.label { font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: .08em; color: #536471; margin-bottom: 10px; }
+.label.after { color: #0a84d8; }
+ul.list { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; font-size: 19px; color: #26323d; }
+ul.list li { display: grid; grid-template-columns: max-content 1fr; column-gap: 12px; }
+ul.list b { color: #0a84d8; }
+.from { text-decoration: line-through; color: #7b8a97; }

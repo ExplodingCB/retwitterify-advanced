@@ -18,9 +18,12 @@ for (const size of [32, 192]) {
 }
 // Birdify's own logo is the toolbar, add-on manager and store icon.
 const logo = await readFile(join(extension, "icons", "logo.svg"));
-for (const size of [16, 32, 48, 64, 96, 128]) {
+for (const size of [16, 32, 48, 64, 96]) {
   await sharp(logo).resize(size, size).png().toFile(join(extension, "icons", `icon-${size}.png`));
 }
+// Store icons draw 96px artwork inside 16px of transparent padding.
+await sharp(logo).resize(96, 96).extend({ top: 16, bottom: 16, left: 16, right: 16, background: { r: 0, g: 0, b: 0, alpha: 0 } })
+  .png().toFile(join(extension, "icons", "icon-128.png"));
 const manifest = JSON.parse(await readFile(join(extension, "manifest.json"), "utf8"));
 async function entries(folder) {
   const files = {};
