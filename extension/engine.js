@@ -1,11 +1,11 @@
 /* SPDX-License-Identifier: MPL-2.0 */
 (() => {
   "use strict";
-  const api = globalThis.ReTwitterify;
+  const api = globalThis.Birdify;
   const blocked = [
     "script", "style", "noscript", "code", "pre", "select",
     '[contenteditable]:not([contenteditable="false"])', '[role="textbox"]',
-    '[translate="no"]', '[data-retwitterify-ignore]',
+    '[translate="no"]', '[data-birdify-ignore]',
     '[aria-label="Close"]', '[data-testid="app-bar-close"]',
     '[data-testid="tweetText"]', '[data-testid="UserName"]', '[data-testid="User-Name"]',
     '[data-testid="UserDescription"]', '[data-testid="UserLocation"]', '[data-testid="UserUrl"]',
@@ -137,7 +137,7 @@
       if (!rel.some(value => ["icon", "apple-touch-icon", "mask-icon"].includes(value))) return;
       const mask = rel.includes("mask-icon");
       const touch = rel.includes("apple-touch-icon");
-      write(link, "href", assetURL(mask ? "icons/bird.svg" : touch ? "icons/icon-192.png" : "icons/icon-32.png"));
+      write(link, "href", assetURL(mask ? "icons/bird.svg" : touch ? "icons/bird-192.png" : "icons/bird-32.png"));
       write(link, "type", mask ? "image/svg+xml" : "image/png");
       if (!mask) write(link, "sizes", touch ? "192x192" : "32x32");
       if (link.hasAttribute("color")) write(link, "color", "#1da1f2");
@@ -187,7 +187,7 @@
       if (!options.logos || !document.head || document.head.querySelector('link[rel~="icon"]')) return;
       const icon = document.createElement("link");
       icon.rel = "icon";
-      icon.href = assetURL("icons/icon-32.png");
+      icon.href = assetURL("icons/bird-32.png");
       icon.type = "image/png";
       ownNodes.add(icon);
       document.head.append(icon);

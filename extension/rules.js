@@ -77,5 +77,5 @@
   // Bird geometry from Xenoreaper/ReTwitterify (MPL-2.0), see THIRD_PARTY_NOTICES.
   const birdPath = "M630 425A195 195 0 0 1 331 600A142 142 0 0 0 428 570A70 70 0 0 1 370 523A70 70 0 0 0 401 521A70 70 0 0 1 344 455A70 70 0 0 0 372 460A70 70 0 0 1 354 370A195 195 0 0 0 495 442A67 67 0 0 1 611 380A117 117 0 0 0 654 363A65 65 0 0 1 623 401A117 117 0 0 0 662 390A65 65 0 0 1 630 425Z";
 
-  globalThis.ReTwitterify = { defaults, settings, replaceUI, replaceActivity, replaceTitle, birdPath };
+  globalThis.Birdify = { defaults, settings, replaceUI, replaceActivity, replaceTitle, birdPath };
 })();

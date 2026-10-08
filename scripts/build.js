@@ -9,11 +9,17 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 const extension = join(root, "extension");
 const context = vm.createContext({});
 vm.runInContext(await readFile(join(extension, "rules.js"), "utf8"), context);
-const bird = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="310 310 370 370"><path fill="#1da1f2" d="${context.ReTwitterify.birdPath}"/></svg>`;
+const bird = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="310 310 370 370"><path fill="#1da1f2" d="${context.Birdify.birdPath}"/></svg>`;
 await mkdir(join(extension, "icons"), { recursive: true });
+// The classic bird replaces X's logos and tab icons inside the page.
 await writeFile(join(extension, "icons", "bird.svg"), bird);
-for (const size of [16, 32, 48, 64, 96, 128, 192]) {
-  await sharp(Buffer.from(bird)).resize(size, size).png().toFile(join(extension, "icons", `icon-${size}.png`));
+for (const size of [32, 192]) {
+  await sharp(Buffer.from(bird)).resize(size, size).png().toFile(join(extension, "icons", `bird-${size}.png`));
+}
+// Birdify's own logo is the toolbar, add-on manager and store icon.
+const logo = await readFile(join(extension, "icons", "logo.svg"));
+for (const size of [16, 32, 48, 64, 96, 128]) {
+  await sharp(logo).resize(size, size).png().toFile(join(extension, "icons", `icon-${size}.png`));
 }
 const manifest = JSON.parse(await readFile(join(extension, "manifest.json"), "utf8"));
 async function entries(folder) {
@@ -38,7 +44,7 @@ for (const browser of ["chromium", "firefox"]) {
     await cp(join(root, name), join(target, name));
   }
   await writeFile(join(target, "manifest.json"), files["manifest.json"]);
-  const zip = join(root, "dist", `retwitterify-advanced-${browser}-${manifest.version}.zip`);
+  const zip = join(root, "dist", `birdify-${browser}-${manifest.version}.zip`);
   await writeFile(zip, zipSync(files));
   console.log(`${browser}: ${target}\nArchive: ${zip}`);
 }

@@ -5,9 +5,9 @@
   const form = document.getElementById("settings");
   const features = document.getElementById("features");
   const status = document.getElementById("status");
-  let saved = ReTwitterify.settings();
+  let saved = Birdify.settings();
   function render(options) {
-    for (const key of Object.keys(ReTwitterify.defaults)) form.elements.namedItem(key).checked = options[key];
+    for (const key of Object.keys(Birdify.defaults)) form.elements.namedItem(key).checked = options[key];
     form.elements.namedItem("enabled").disabled = false;
     features.disabled = !options.enabled;
   }
@@ -20,7 +20,7 @@
     return;
   }
   extension.storage.local.get("settings").then(result => {
-    saved = ReTwitterify.settings(result.settings);
+    saved = Birdify.settings(result.settings);
     render(saved);
     message(saved.enabled ? "Ready on x.com and twitter.com. Refresh tabs opened before installation." : "Paused. The original appearance is restored.");
   }).catch(() => message("Couldn't load preferences. Close and reopen this popup to retry.", true));

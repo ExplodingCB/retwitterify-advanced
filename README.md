@@ -1,11 +1,12 @@
 <p align="center">
-  <img src="extension/icons/icon-128.png" width="112" alt="ReTwitterify Advanced blue bird icon">
+  <img src="extension/icons/icon-128.png" width="112" alt="Birdify blue bird icon">
 </p>
 
-<h1 align="center">ReTwitterify Advanced</h1>
+<h1 align="center">Birdify</h1>
 
 <p align="center">
-  Bring back Twitter. The name, the bird, the Tweets.
+  Bring back Twitter. The name, the bird, the Tweets.<br>
+  <sub>Formerly ReTwitterify Advanced.</sub>
 </p>
 
 <p align="center">
@@ -16,7 +17,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/popup.jpg" width="370" alt="ReTwitterify Advanced popup with switches for Twitter wording, blue bird logos, Tweets and Retweets">
+  <img src="docs/popup.jpg" width="370" alt="Birdify popup with switches for Twitter wording, blue bird logos, Tweets and Retweets">
 </p>
 
 ## Features
@@ -46,7 +47,12 @@ You do not need Node.js to use a release build.
 
 ### Firefox
 
-1. Download `retwitterify-advanced-firefox-<version>.zip`.
+Install **Birdify** from [addons.mozilla.org](https://addons.mozilla.org/firefox/search/?q=Birdify).
+Firefox keeps it up to date.
+
+To test a release build instead:
+
+1. Download `birdify-firefox-<version>.zip`.
 2. Open `about:debugging#/runtime/this-firefox`.
 3. Click **Load Temporary Add-on** and select the ZIP, or extract it and select
    `manifest.json`.
@@ -54,12 +60,12 @@ You do not need Node.js to use a release build.
 
 Requirements: Firefox 142 or newer, on desktop.
 
-> Firefox builds are currently unsigned. A temporary installation lasts until
-> Firefox restarts. Mozilla signing and store publication are still pending.
+> The release ZIPs on GitHub are unsigned, so a temporary installation lasts
+> until Firefox restarts. The addons.mozilla.org version is signed.
 
 ### Chrome, Edge, Brave and Opera
 
-1. Download and extract `retwitterify-advanced-chromium-<version>.zip`.
+1. Download and extract `birdify-chromium-<version>.zip`.
 2. Open your browser's extensions page: `chrome://extensions` in Chrome or
    `edge://extensions` in Edge.
 3. Enable **Developer mode**, click **Load unpacked**, and select the extracted
@@ -67,8 +73,8 @@ Requirements: Firefox 142 or newer, on desktop.
 4. Refresh your open X/Twitter tabs.
 
 Disable the original ReTwitterify extension if you have it installed, so the two
-versions do not compete over the page. Pin **ReTwitterify Advanced** to the toolbar
-to get to its settings.
+do not compete over the page. Pin **Birdify** to the toolbar to get to its
+settings.
 
 ## Usage
 

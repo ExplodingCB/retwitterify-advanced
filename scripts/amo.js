@@ -33,7 +33,7 @@ await request(`/addons/addon/${addon}/`, { method: "PATCH", body: icon });
 console.log("Listing icon uploaded.");
 if (process.argv.includes("--icon-only")) process.exit(0);
 
-const zip = `dist/retwitterify-advanced-firefox-${manifest.version}.zip`;
+const zip = `dist/birdify-firefox-${manifest.version}.zip`;
 const upload = new FormData();
 upload.append("upload", await file(zip, "application/zip"), zip.split("/").pop());
 upload.append("channel", "listed");

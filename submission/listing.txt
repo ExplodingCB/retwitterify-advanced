@@ -1,8 +1,8 @@
 NAME
-ReTwitterify Advanced
+Birdify
 
 SUGGESTED SLUG
-retwitterify-advanced
+birdify
 
 SUMMARY
 Restore Twitter branding on X: blue birds, Twitter headers and tab titles, plus familiar Tweet and Retweet labels.
@@ -10,7 +10,7 @@ Restore Twitter branding on X: blue birds, Twitter headers and tab titles, plus 
 DESCRIPTION
 Make X feel more like Twitter again.
 
-ReTwitterify Advanced restores Twitter branding across the English X web interface:
+Birdify restores Twitter branding across the English X web interface:
 
 • Twitter in site headers, browser tab titles, navigation, and supported interface labels.
 • Blue bird logos and browser tab icons, including the redesigned public login page.
@@ -21,7 +21,7 @@ ReTwitterify Advanced restores Twitter branding across the English X web interfa
 
 The extension is designed to leave tweet bodies, recognized profile/name fields, direct-message content, and text you are writing unchanged. Website addresses and link destinations remain unchanged. X’s experiments or future interface changes may require additional updates.
 
-Everything runs locally. ReTwitterify Advanced stores only four appearance preferences in your browser and makes no analytics or telemetry requests. After installing, refresh your open X tabs.
+Everything runs locally. Birdify stores only four appearance preferences in your browser and makes no analytics or telemetry requests. After installing, refresh your open X tabs.
 
 Works on x.com and twitter.com, including their www and mobile subdomains. English interface wording is supported. Other websites and embedded tweets are outside its scope.
 
@@ -43,7 +43,7 @@ PLATFORMS
 Firefox desktop: Windows, macOS, Linux. Do not select Android for this initial release; mobile was not tested.
 
 RELEASE NOTES
-2.1.0: The header bird now replaces X's current logo, including redrawn versions. Premium is Twitter Blue again, Chat and History read Messages and Bookmarks, and Tweet and Retweet are capitalized as Twitter wrote them, including in notifications. Adds 64 and 96 pixel icons.
+2.2.0: ReTwitterify Advanced is now Birdify, with a new icon. Also includes 2.1.0: the header bird replaces X's current logo, Premium is Twitter Blue again, Chat and History read Messages and Bookmarks, and Tweet and Retweet are capitalized as Twitter wrote them, including in notifications.
 
 HOMEPAGE
 https://github.com/ExplodingCB/retwitterify-advanced
