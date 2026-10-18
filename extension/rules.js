@@ -15,6 +15,8 @@
   // Renamed items, matched only as a whole label: "Chat", "History" and
   // "Quote" are ordinary words elsewhere.
   const labels = { Chat: "Messages", History: "Bookmarks", Quote: "Quote Tweet", Quotes: "Quote Tweets" };
+  // X renamed its Premium navigation item to Subscription.
+  const brandLabels = { Subscription: "Twitter Blue" };
   const brand = "(?<![\\p{L}\\p{N}_./@#-])";
   const products = [
     [new RegExp(`${brand}X Corp(?:oration)?\\.?(?![\\p{L}\\p{N}_-])`, "gu"), "Twitter, Inc."],
@@ -27,10 +29,9 @@
 
   function replaceUI(text, options = defaults) {
     if (!options.enabled || !text) return text;
-    if (options.terminology) {
-      const label = text.trim();
-      if (Object.hasOwn(labels, label)) return text.replace(label, labels[label]);
-    }
+    const label = text.trim();
+    if (options.brandText && Object.hasOwn(brandLabels, label)) return text.replace(label, brandLabels[label]);
+    if (options.terminology && Object.hasOwn(labels, label)) return text.replace(label, labels[label]);
     return text.split(protectedTokens).map((part, index) => {
       if (index % 2) return part;
       if (options.brandText) {
@@ -65,12 +66,13 @@
       next = next.replace(/^(\(\d+\)\s*)?X(?=\. It[’']s what[’']s happening)/, "$1Twitter");
       const quotedTweet = next.match(/^((?:\(\d+\)\s*)?.+?) on X(?=:\s*["“])/);
       if (quotedTweet) return next.replace(quotedTweet[0], `${quotedTweet[1]} on Twitter`);
+      next = next.replace(/^((?:\(\d+\)\s*)?)Subscription(?=\s*[/|–—-]|$)/, "$1Twitter Blue");
     }
     if (options.terminology) {
       next = next.replace(/^((?:\(\d+\)\s*)?)(Chat|History)(?=\s*[/|–—-]|$)/, (_, count, label) => count + labels[label]);
     }
     // Only known navigation titles are UI: a profile may itself be named X.
-    if (/^(?:\(\d+\)\s*)?(?:Home|Explore|Notifications|Messages|Chat|Bookmarks|History|Premium|Search|Post|Posts|Settings|Sign in|Log in|Sign up)(?:\s*[/|–—-]|$)/.test(next)) return replaceUI(next, options);
+    if (/^(?:\(\d+\)\s*)?(?:Home|Explore|Notifications|Messages|Chat|Bookmarks|History|Premium|Subscription|Search|Post|Posts|Settings|Sign in|Log in|Sign up)(?:\s*[/|–—-]|$)/.test(next)) return replaceUI(next, options);
     return next;
   }
 

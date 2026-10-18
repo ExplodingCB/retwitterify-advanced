@@ -5,8 +5,8 @@ import { JSDOM } from "jsdom";
 
 const sources = ["rules.js", "engine.js"].map(name => readFileSync(new URL(`../extension/${name}`, import.meta.url), "utf8"));
 const xPath = "M18.244 2.25h3.308l-7.227 8.26L22.827 21.75h-6.626l-5.19-6.786L5.064 21.75H1.754l7.73-8.835L1.254 2.25H8.03l4.713 6.203Zm-1.161 17.52h1.833L7.035 4.126H5.068Z";
-function setup(t, html, settings) {
-  const dom = new JSDOM(html, { url: "https://x.com/home", runScripts: "outside-only" });
+function setup(t, html, settings, url = "https://x.com/home") {
+  const dom = new JSDOM(html, { url, runScripts: "outside-only" });
   const { window } = dom;
   sources.forEach(source => window.eval(source));
   const asset = path => `chrome-extension://birdify/${path}`;
@@ -186,4 +186,41 @@ test("notification rows change activity wording but not names or quoted tweets",
   assert.equal(spans[1].textContent, "New Tweet notifications for ");
   assert.equal(document.querySelector('[data-testid="tweetText"]').textContent, "your post on X");
   assert.equal(document.querySelector("button").textContent, "Retweet");
+});
+test("the Subscription navigation item reads Twitter Blue", t => {
+  const { document } = setup(t, `<nav aria-label="Primary"><a href="/i/premium_sign_up" aria-label="Subscription"><span>Subscription</span></a></nav>
+    <main><h2>Manage your subscription</h2><a href="/i/subscriptions"><span>Subscriptions</span></a></main>`);
+  const item = document.querySelector("nav a");
+  assert.equal(item.textContent, "Twitter Blue");
+  assert.equal(item.getAttribute("aria-label"), "Twitter Blue");
+  assert.equal(document.querySelector("h2").textContent, "Manage your subscription");
+  assert.equal(document.querySelector("main a").textContent, "Subscriptions");
+});
+// React Native Web draws a photo as a background image plus a transparent <img>.
+const cardTile = label => `<a href="/i/money/card"><div><span>${label}</span><svg viewBox="0 0 24 24"><path d="M1 1"></path></svg></div>
+  <div><div><div style="background-image: url(&quot;https://abs.twimg.com/card.png&quot;); background-size: cover;"></div>
+  <img alt="" src="https://abs.twimg.com/card.png" srcset="https://abs.twimg.com/card@2x.png 2x"></div></div></a>`;
+test("the Money page's card shows the bird and is restored when paused", async t => {
+  const { document, engine, api, asset } = setup(t, `<main>${cardTile("X Card")}
+    <a href="/i/money/account"><span>Individual account</span><div><img alt="" src="https://pbs.twimg.com/avatar.jpg"></div></a></main>`,
+  undefined, "https://x.com/i/money");
+  const [art, avatar] = document.querySelectorAll("img");
+  const background = document.querySelector("[style]");
+  assert.equal(document.querySelector("span").textContent, "Twitter Card");
+  assert.equal(art.getAttribute("src"), asset("icons/card.svg"));
+  assert.equal(art.hasAttribute("srcset"), false);
+  assert.match(background.style.backgroundImage, /icons\/card\.svg/);
+  assert.equal(background.style.backgroundSize, "cover");
+  assert.equal(avatar.getAttribute("src"), "https://pbs.twimg.com/avatar.jpg");
+  art.src = "https://abs.twimg.com/card-new.png";
+  await settle();
+  assert.equal(art.getAttribute("src"), asset("icons/card.svg"));
+  engine.update(api.settings({ logos: false }));
+  assert.equal(art.getAttribute("src"), "https://abs.twimg.com/card-new.png");
+  assert.equal(art.getAttribute("srcset"), "https://abs.twimg.com/card@2x.png 2x");
+  assert.match(background.style.backgroundImage, /abs\.twimg\.com\/card\.png/);
+});
+test("card-like photos away from the Money page are left alone", t => {
+  const { document } = setup(t, `<main>${cardTile("X Card")}<article data-testid="tweet">${cardTile("X Card")}</article></main>`);
+  for (const img of document.querySelectorAll("img")) assert.equal(img.getAttribute("src"), "https://abs.twimg.com/card.png");
 });

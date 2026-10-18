@@ -16,6 +16,29 @@ await writeFile(join(extension, "icons", "bird.svg"), bird);
 for (const size of [32, 192]) {
   await sharp(Buffer.from(bird)).resize(size, size).png().toFile(join(extension, "icons", `bird-${size}.png`));
 }
+// The Money page's metal card, with the bird embossed where X's logo was.
+// Drawn on a 856x540 card (a bank card's proportions), then tilted and
+// cropped the way X frames it in the card tile.
+const birdOnCard = "translate(370 104) scale(1.4) translate(-331 -363)";
+const card = `<defs>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d3d4d6"/><stop offset=".45" stop-color="#b3b4b7"/><stop offset=".7" stop-color="#c7c8ca"/><stop offset="1" stop-color="#a4a5a8"/></linearGradient>
+  <linearGradient id="raised" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dcdddf"/><stop offset="1" stop-color="#b9babd"/></linearGradient>
+  <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2e2e2"/><stop offset="1" stop-color="#a9a9a9"/></linearGradient>
+  <filter id="brushed" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency="0.002 0.9" numOctaves="2" seed="7"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .09 0"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+  <clipPath id="edge"><rect width="856" height="540" rx="38"/></clipPath>
+</defs>
+<g clip-path="url(#edge)">
+  <rect width="856" height="540" fill="url(#metal)"/>
+  <rect width="856" height="540" fill="#fff" filter="url(#brushed)"/>
+  <path d="${context.Birdify.birdPath}" transform="translate(4 5) ${birdOnCard}" fill="#6f7073" opacity=".45"/>
+  <path d="${context.Birdify.birdPath}" transform="translate(-3 -3) ${birdOnCard}" fill="#f4f4f5" opacity=".85"/>
+  <path d="${context.Birdify.birdPath}" transform="${birdOnCard}" fill="url(#raised)" stroke="#9c9da0" stroke-width="1.5"/>
+  <rect x="80" y="200" width="122" height="94" rx="16" fill="url(#chip)" stroke="#8d8d8f" stroke-width="2"/>
+  <path d="M80 232h40m-40 30h40m42-30h40m-40 30h40M120 200v94m42-94v94m-42-47h42" fill="none" stroke="#8d8d8f" stroke-width="2"/>
+  <rect x="1" y="1" width="854" height="538" rx="37" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2"/>
+</g>`;
+await writeFile(join(extension, "icons", "card.svg"),
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 408 248" preserveAspectRatio="xMinYMin slice"><g transform="translate(4 108) rotate(-16) scale(.4264)">${card}</g></svg>\n`);
 // Birdify's own logo is the toolbar, add-on manager and store icon.
 const logo = await readFile(join(extension, "icons", "logo.svg"));
 for (const size of [16, 32, 48, 64, 96]) {

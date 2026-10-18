@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Birdify",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Bring back Twitter: bird logos, tab titles, headers, interface labels, Tweets and Retweets.",
   "homepage_url": "https://github.com/ExplodingCB/retwitterify-advanced",
   "permissions": ["storage"],
@@ -31,7 +31,7 @@
     "run_at": "document_start"
   }],
   "web_accessible_resources": [{
-    "resources": ["icons/bird.svg", "icons/bird-32.png", "icons/bird-192.png"],
+    "resources": ["icons/bird.svg", "icons/bird-32.png", "icons/bird-192.png", "icons/card.svg"],
     "matches": ["https://*.x.com/*", "https://*.twitter.com/*"]
   }],
   "browser_specific_settings": {

@@ -26,7 +26,8 @@
   and supported labels use Twitter again. `Premium` becomes `Twitter Blue`,
   `X Pro` becomes `TweetDeck`, and the footer reads `Twitter, Inc.`
 - **The blue bird.** Restores navigation, loading and login logos, along with
-  browser tab icons. The header logo is found by where it sits on the page, so it
+  browser tab icons. The card on the Money page becomes a Twitter Card, with the
+  bird embossed on the metal. The header logo is found by where it sits on the page, so it
   is replaced even when X changes the shape of its SVG.
 - **Tweets and Retweets.** Familiar wording for post/repost buttons, tabs, counts,
   menu actions and notifications, capitalized the way Twitter wrote them:
@@ -84,7 +85,7 @@ Open X as usual. Click the extension's bird icon to choose what comes back:
 |---|---|
 | **Bring back Twitter** | Pauses or resumes all changes |
 | **Twitter everywhere** | Headers, browser tab titles, Twitter Blue, and supported interface wording |
-| **The blue bird** | Recognized site logos, favicons, and touch icons |
+| **The blue bird** | Recognized site logos, favicons, touch icons, and the Money page's card |
 | **Tweets & Retweets** | Post/repost terminology, plus Messages and Bookmarks in navigation |
 
 Settings apply to open tabs with the extension loaded. Refresh tabs opened before

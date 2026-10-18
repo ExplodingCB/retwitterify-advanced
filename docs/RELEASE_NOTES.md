@@ -1,5 +1,10 @@
 Bring back Twitter names, blue birds, Tweets and Retweets on the modern X website.
 
+## What's new in 2.3.0
+
+- X renamed its `Premium` navigation item to `Subscription`. It reads `Twitter Blue` again, in navigation and the tab title.
+- The card on the Money page is a Twitter Card now: the metal card has the bird embossed where X's logo was. It follows the blue bird switch.
+
 ## What's new in 2.2.1
 
 - The 128 pixel icon follows Chrome Web Store guidelines (96 pixel artwork with transparent padding), ahead of the Chrome Web Store listing.

@@ -79,7 +79,7 @@
       }
       // Whole, known site labels in otherwise unlabelled React spans.
       const text = element.textContent.trim();
-      return /^(?:X|X Premium\+?|Premium\+?|Subscribe to Premium|Chat|History|X Pro|X for (?:Business|Professionals)|About X|Search X|Join X today\.?|New to X\??|Sign (?:in|up) (?:to|for) X|©\s*\d{4}\s+X Corp\.?|\d[\d,.KMk]* (?:posts?|reposts?)|(?:Post|Posts|Repost|Reposts|Quote|Quote post|Post your reply|Post your answer|What's happening\?))$/.test(text) ||
+      return /^(?:X|X Premium\+?|Premium\+?|Subscribe to Premium|Subscription|Chat|History|X Pro|X for (?:Business|Professionals)|About X|Search X|Join X today\.?|New to X\??|Sign (?:in|up) (?:to|for) X|©\s*\d{4}\s+X Corp\.?|\d[\d,.KMk]* (?:posts?|reposts?)|(?:Post|Posts|Repost|Reposts|Quote|Quote post|Post your reply|Post your answer|What's happening\?))$/.test(text) ||
         /\b(?:on|to|from|with|about|of|for|using|Join) X(?:\b|[’'])/.test(text) ||
         /^X(?:[’']s| (?:Premium|Pro|Corp|Help|Ads|API|Analytics))\b/.test(text);
     }
@@ -131,6 +131,26 @@
         write(path, "style", next.style.cssText);
       }
     }
+    // The Money page's card tile shows a photo of the metal X card under its
+    // label. React Native Web draws a photo twice: as a background and an <img>.
+    function processCard(element) {
+      const image = element.tagName === "IMG";
+      if (!image && !/background-image\s*:\s*url/i.test(element.getAttribute("style") || "")) return;
+      if (!/(?:^|\/)money(?:\/|$)/.test(win.location.pathname) || element.closest('article,[data-testid="tweet"]')) return;
+      let tile = element.parentElement;
+      for (let depth = 0; tile && depth < 10 && !tile.textContent.trim(); depth++) tile = tile.parentElement;
+      if (!tile || !/^(?:X|Twitter) Card\W*$/.test(tile.textContent.trim())) return;
+      const art = assetURL("icons/card.svg");
+      if (image) {
+        write(element, "src", art);
+        write(element, "srcset", null);
+        return;
+      }
+      const next = document.createElement("div");
+      next.setAttribute("style", element.getAttribute("style"));
+      next.style.setProperty("background-image", `url("${art}")`);
+      write(element, "style", next.style.cssText);
+    }
     function processIcon(link) {
       if (!options.logos || link.tagName !== "LINK" || !link.closest("head")) return;
       const rel = link.rel.toLowerCase().split(/\s+/);
@@ -146,6 +166,7 @@
       if (isBlocked(element)) return;
       if (element.localName === "svg") processLogo(element);
       if (element.tagName === "LINK") processIcon(element);
+      if (options.logos && (element.tagName === "IMG" || element.hasAttribute("style"))) processCard(element);
       if (element.tagName === "IMG" && options.logos && (/^(?:X|X logo)$/.test(element.alt) || knownImages.has(element)) &&
           !element.closest('article,[data-testid="tweet"]')) {
         knownImages.add(element);
